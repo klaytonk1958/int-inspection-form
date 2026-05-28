@@ -10,11 +10,6 @@ export default function PreShiftInspectionForm() {
   const [equipment, setEquipment] = useState("");
   const [equipmentOptions, setEquipmentOptions] = useState<string[]>([]);
   const [hourMeter, setHourMeter] = useState("");
-  const [location, setLocation] = useState("");
-  const [locationOptions, setLocationOptions] = useState<string[]>([]);
-  const [siteType, setSiteType] = useState<"Standard Site" | "MSHA Site" | "">(
-    ""
-  );
   const [rows, setRows] = useState<ChecklistRow[]>(CHECKLIST_ROWS);
   const [machineStatus, setMachineStatus] = useState<"Running" | "Down" | "">(
     ""
@@ -74,23 +69,17 @@ export default function PreShiftInspectionForm() {
       try {
         const start = performance.now();
 
-        const [locRes, equipRes] = await Promise.all([
-          fetch(`${API_URL}?type=locations`),
-          fetch(`${API_URL}?type=equipments`)
-        ]);
+        const equipRes = await fetch(`${API_URL}/api/equipment`);
 
         const end = performance.now();
         console.log(`Options fetch time: ${(end - start).toFixed(2)} ms`);
 
-        if (!locRes.ok || !equipRes.ok) {
+        if (!equipRes.ok) {
           throw new Error('Failed to fetch options');
         }
 
-        const locations = await locRes.json();
         const equipments = await equipRes.json();
-
-        setLocationOptions(locations.locations);
-        setEquipmentOptions(equipments.equipments);
+        setEquipmentOptions(equipments.map((e: { name: string; serial: string }) => e.name));
       } catch (error) {
         console.error('Error fetching options:', error);
       }
@@ -140,12 +129,10 @@ export default function PreShiftInspectionForm() {
     if (
       !operatorName.trim() ||
       !equipment.trim() ||
-      !hourMeter.trim() ||
-      !location.trim() ||
-      !siteType
+      !hourMeter.trim()
     ) {
       setSubmitMessage(
-        "Please fill required fields: Operator Name, Equipment, Hour Meter, Location, Site Type."
+        "Please fill required fields: Operator Name, Equipment, Hour Meter"
       );
       setLoading(false);
       return;
@@ -164,8 +151,6 @@ export default function PreShiftInspectionForm() {
         "Operator Name:": operatorName,
         "Equipment:": equipment,
         "Hour Meter:": hourMeter,
-        "Location:": location,
-        "Site Type:": siteType,
         "Machine Status:": machineStatus,
         "ISSUES DETAILED:": issuesDetailed,
         "Priority Level:": priority,
@@ -297,46 +282,6 @@ export default function PreShiftInspectionForm() {
                 required
               />
 
-              <label className="text-sm font-medium">
-                Location: <span className="text-red-500">*</span>
-              </label>
-              <select
-                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                required
-              >
-                <option value="">Select Location</option>
-                {locationOptions.map((loc) => (
-                  <option key={loc} value={loc}>{loc}</option>
-                ))}
-              </select>
-
-              <label className="text-sm font-medium">
-                Site Type: <span className="text-red-500">*</span>
-              </label>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setSiteType("Standard Site")}
-                  className={`flex-1 rounded-lg px-3 py-2 text-sm border ${siteType === "Standard Site"
-                      ? "bg-slate-800 text-white"
-                      : "bg-white text-gray-700 border-gray-200"
-                    }`}
-                >
-                  Standard Site
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSiteType("MSHA Site")}
-                  className={`flex-1 rounded-lg px-3 py-2 text-sm border ${siteType === "MSHA Site"
-                      ? "bg-slate-800 text-white"
-                      : "bg-white text-gray-700 border-gray-200"
-                    }`}
-                >
-                  MSHA Site
-                </button>
-              </div>
             </section>
 
             {/* System & Safety Checklist */}
@@ -363,8 +308,8 @@ export default function PreShiftInspectionForm() {
                             type="button"
                             onClick={() => setRowValue(r.id, opt)}
                             className={`text-xs px-3 py-1 rounded-full border  ${r.value === opt
-                                ? OPTION_COLORS[opt]
-                                : "bg-white text-gray-700 border-gray-200"
+                              ? OPTION_COLORS[opt]
+                              : "bg-white text-gray-700 border-gray-200"
                               }`}
                           >
                             {opt}
@@ -390,8 +335,8 @@ export default function PreShiftInspectionForm() {
                   type="button"
                   onClick={() => setMachineStatus("Running")}
                   className={`flex-1 rounded-lg px-3 py-2 text-sm ${machineStatus === "Running"
-                      ? "bg-slate-800 text-white"
-                      : "bg-white text-gray-700 border border-gray-200"
+                    ? "bg-slate-800 text-white"
+                    : "bg-white text-gray-700 border border-gray-200"
                     }`}
                 >
                   Running
@@ -400,8 +345,8 @@ export default function PreShiftInspectionForm() {
                   type="button"
                   onClick={() => setMachineStatus("Down")}
                   className={`flex-1 rounded-lg px-3 py-2 text-sm ${machineStatus === "Down"
-                      ? "bg-red-600 text-white"
-                      : "bg-white text-gray-700 border border-gray-200"
+                    ? "bg-red-600 text-white"
+                    : "bg-white text-gray-700 border border-gray-200"
                     }`}
                 >
                   Down
@@ -428,7 +373,7 @@ export default function PreShiftInspectionForm() {
                   onChange={(e) => setIssuesDetailed(e.target.value)}
                   placeholder="Describe any issues / damages / codes. Ex. Broken Mirror - Describe if its the glass, the plastic back piece, etc."
                 /></>
-              
+
               <label className="text-sm font-medium">
                 Priority Level: <span className="text-red-500">*</span>
               </label>
@@ -441,8 +386,8 @@ export default function PreShiftInspectionForm() {
                     type="button"
                     onClick={() => setPriority(p)}
                     className={`flex-1 rounded-lg px-3 py-2 text-sm ${priority === p
-                        ? OPTION_COLORS[p]
-                        : "bg-white text-gray-700 border border-gray-200"
+                      ? OPTION_COLORS[p]
+                      : "bg-white text-gray-700 border border-gray-200"
                       }`}
                   >
                     {p}
