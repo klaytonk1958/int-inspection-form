@@ -6,7 +6,6 @@ const SCOPES = [
 ];
 
 const jsonString = Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT!, "base64").toString("utf-8");
-console.log("jsonString", jsonString);
 const serviceAccount = JSON.parse(jsonString);
 
 const auth = new google.auth.GoogleAuth({

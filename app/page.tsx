@@ -174,21 +174,21 @@ export default function PreShiftInspectionForm() {
         payload[`Upload Issue Photos ${idx + 1}`] = p.url;
       })
 
-      const res = await fetch(API_URL, {
+      const res = await fetch(`${API_URL}/api/pre-shift`, {
         method: "POST",
         redirect: "follow",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({ "task": "init", "data": payload }),
       });
-      console.log(res)
+
       if (!res.ok) {
         const t = await res.text();
         throw new Error(t || "Submission failed");
       }
 
       setSubmitMessage("Inspection submitted ✓");
-      setShowThankYou(true);
       setLoading(false);
+      setShowThankYou(true);
       // optional: reset form
       // resetForm();
     } catch (err: any) {
@@ -217,9 +217,10 @@ export default function PreShiftInspectionForm() {
       {!showThankYou && (
         <div className="bg-white rounded-2xl shadow-md p-4">
           <header className="mb-5">
-            <h1 className="text-2xl p-3 mb-4 text-slate-800 pre-shift-header">
-              Pre-Shift Inspection
+            <h1 className="text-2xl p-3 text-white pre-shift-header  mb-2">
+              EPM Pre-Shift Inspection
             </h1>
+            <h2 className="text-base text-slate-600 text-center  mb-4">Even Par Mine ID# 38-00774</h2>
             <p className="text-sm text-slate-600 mt-2">
               Complete this form before each shift. If an issue arises during the
               day, submit a new inspection.
