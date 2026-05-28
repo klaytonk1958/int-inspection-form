@@ -8,7 +8,7 @@ export async function uploadImage(picture: File): Promise<string> {
   const { drive } = await getGoogleServices();
 
   try {
-    const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
+    const folderId = process.env.PRE_SHIFT_IMAGE_GOOGLE_DRIVE_FOLDER_ID;
     if (!folderId) throw new Error('Google Drive folder ID is not configured');
 
     // ✅ Convert web File -> Node Readable Stream

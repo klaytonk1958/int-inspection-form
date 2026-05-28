@@ -216,33 +216,37 @@ export default function PreShiftInspectionForm() {
       {/* Main Form */}
       {!showThankYou && (
         <div className="bg-white rounded-2xl shadow-md p-4">
-          <header className="mb-5">
-            <h1 className="text-2xl p-3 text-white pre-shift-header  mb-2">
-              EPM Pre-Shift Inspection
-            </h1>
-            <h2 className="text-base text-slate-600 text-center  mb-4">Even Par Mine ID# 38-00774</h2>
-            <p className="text-sm text-slate-600 mt-2">
-              Complete this form before each shift. If an issue arises during the
-              day, submit a new inspection.
+          <header className="mb-6 border-b border-slate-100 pb-5">
+            <div className="bg-slate-900 text-white rounded-xl p-4 text-center mb-4">
+              <h1 className="text-xl font-bold tracking-wider font-sans uppercase">
+                EPM Pre-Shift Inspection
+              </h1>
+              <p className="text-xs text-slate-400 tracking-widest uppercase mt-1">
+                Even Par Mine ID# 38-00774
+              </p>
+            </div>
+            
+            <p className="text-xs text-slate-500 leading-relaxed text-center mb-4">
+              Complete this form before each shift. If an issue arises during the day, submit a new inspection.
             </p>
-            <div className="mt-2 flex items-center gap-2">
-              <span className="inline-block bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-semibold">
-                Report all issues to your Foreman. Use Lock Out / Tag Out if
-                required.
+
+            <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-center mb-4">
+              <span className="text-xs font-semibold text-red-700 block">
+                Report all issues to your Foreman.
+              </span>
+              <span className="text-[11px] text-red-600 block mt-0.5">
+                Use Lock Out / Tag Out if required.
               </span>
             </div>
-            <p className="text-xs text-slate-400 mt-2">
-              For assistance or to add equipment, contact Klayton:{" "}
-              <a
-                href="tel:8033007596"
-                className="font-medium text-slate-700 underline hover:text-slate-900"
-              >
-                803-300-7596
-              </a>
-            </p>
-            <p className="text-xs text-slate-400 mt-1">
-              <span className="text-red-500">*</span> Required field
-            </p>
+
+            <div className="flex justify-between items-center text-[11px] text-slate-400">
+              <span>
+                Support: <a href="tel:8033007596" className="text-slate-600 hover:text-slate-800 underline font-medium">Klayton (803-300-7596)</a>
+              </span>
+              <span>
+                <span className="text-red-500">*</span> Required field
+              </span>
+            </div>
           </header>
 
           <form onSubmit={handleSubmit} className="space-y-4">
