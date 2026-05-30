@@ -61,10 +61,26 @@ export async function POST(request: NextRequest) {
     // 6. Prepare new row matching the headers
     const newRow = headers.map((h: string) => (data[h] !== undefined ? data[h] : ""));
 
-    // 7. Append the row to the sheet "Data"
-    await sheets.spreadsheets.values.append({
+    // Read column A
+    const allDataResponse = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
-      range: "'Pre Shift Data'!A1",
+      range: "'Pre Shift Data'!A:A",
+    });
+
+    const allRows = allDataResponse.data.values || [];
+
+    // Find the last non-empty row in column A
+    let lastDataRow = allRows.length;
+    while (lastDataRow > 0 && !allRows[lastDataRow - 1]?.[0]) {
+      lastDataRow--;
+    }
+
+    const nextRow = lastDataRow + 1;
+
+    // 8. Write the new row to the exact next empty row using update (guaranteed, no overwrite)
+    await sheets.spreadsheets.values.update({
+      spreadsheetId: sheetId,
+      range: `'Pre Shift Data'!A${nextRow}`,
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [newRow],

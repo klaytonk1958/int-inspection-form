@@ -5,7 +5,7 @@ const SCOPES = [
   "https://www.googleapis.com/auth/spreadsheets.readonly",
 ];
 
-const jsonString = Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT!, "base64").toString("utf-8");
+const jsonString = Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT || "", "base64").toString("utf-8");
 const serviceAccount = JSON.parse(jsonString);
 
 const auth = new google.auth.GoogleAuth({
