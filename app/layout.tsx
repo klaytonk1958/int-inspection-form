@@ -3,8 +3,16 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Pre-Shift Inspection",
-  description: "Robert Collins Company Pre-Shift Inspection Form",
+  title: "EPM Pre-Shift Inspection",
+  description: "Even Par Mine Pre-Shift Inspection Form",
+  icons: {
+    icon: [
+      { url: "/Black No BG.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/Black No BG.png", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
