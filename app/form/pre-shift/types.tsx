@@ -95,23 +95,23 @@ export const CHECKLIST_ROWS: ChecklistRow[] = [
     value: "",
   },
   { id: "housekeeping", label: "Housekeeping:", value: "" },
-  { id: "ladders", label: "Ladders, Steps, and Platforms:", value: "" },
+  // { id: "ladders", label: "Ladders, Steps, and Platforms:", value: "" },
   { id: "heater", label: "Heater, Defroster, AC:", value: "" },
 
   // ADD Air Filter and Fuel Filter
-  { id: "air_filter", label: "Air Filter:", value: "" , note: "Check date"},
-  { id: "fuel_filter", label: "Fuel Filter:", value: "" , note: "Check date"},
+  { id: "air_filter", label: "Air Filter:", value: "", note: "Check date" },
+  { id: "fuel_filter", label: "Fuel Filter:", value: "", note: "Check date" },
 
 ];
 
 
 export const OPTION_COLORS = {
-    "Good": "bg-green-600 border-green-600",
-    "Bad": "bg-red-600 border-red-600",
-    "N/A": "bg-slate-800 border-slate-800",
-    // "N/A NONE", "Critical", "Medium", "Low"
-    "N/A NONE": "bg-slate-800 border-slate-800",
-    "Critical": "bg-red-600 border-red-600",
-    "Medium": "bg-yellow-500 border-yellow-500",
-    "Low": "bg-green-600 border-green-600",
+  "Good": "bg-green-600 border-green-600",
+  "Bad": "bg-red-600 border-red-600",
+  "N/A": "bg-slate-800 border-slate-800",
+  // "N/A NONE", "Critical", "Medium", "Low"
+  "N/A NONE": "bg-slate-800 border-slate-800",
+  "Critical": "bg-red-600 border-red-600",
+  "Medium": "bg-yellow-500 border-yellow-500",
+  "Low": "bg-green-600 border-green-600",
 }
