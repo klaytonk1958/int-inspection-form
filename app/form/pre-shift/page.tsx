@@ -73,8 +73,11 @@ export default function PreShiftInspectionForm() {
         }
 
         const equipments = await equipRes.json();
-        setEquipmentOptions(equipments.map((e: { name: string; serial: string }) =>
-          e.serial ? `${e.name} - ${e.serial}` : e.name
+        // sort by id
+        equipments.sort((a: { id: string }, b: { id: string }) => a.id.localeCompare(b.id));
+
+        setEquipmentOptions(equipments.map((e: { id: string, name: string; serial: string }) =>
+          [e.id, e.name, e.serial].filter(Boolean).join(" - ")
         ));
       } catch (error) {
         console.error('Error fetching options:', error);
