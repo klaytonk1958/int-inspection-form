@@ -67,19 +67,15 @@ export default function PreShiftInspectionForm() {
     // Fetch locations and equipment options when component mounts
     async function fetchOptions() {
       try {
-        const start = performance.now();
-
         const equipRes = await fetch(`${API_URL}/api/equipment`);
-
-        const end = performance.now();
-        console.log(`Options fetch time: ${(end - start).toFixed(2)} ms`);
-
         if (!equipRes.ok) {
           throw new Error('Failed to fetch options');
         }
 
         const equipments = await equipRes.json();
-        setEquipmentOptions(equipments.map((e: { name: string; serial: string }) => e.name));
+        setEquipmentOptions(equipments.map((e: { name: string; serial: string }) =>
+          e.serial ? `${e.name} - ${e.serial}` : e.name
+        ));
       } catch (error) {
         console.error('Error fetching options:', error);
       }
@@ -225,7 +221,7 @@ export default function PreShiftInspectionForm() {
                 Even Par Mine ID# 38-00774
               </p>
             </div>
-            
+
             <p className="text-xs text-slate-500 leading-relaxed text-center mb-4">
               Complete this form before each shift. If an issue arises during the day, submit a new inspection.
             </p>
