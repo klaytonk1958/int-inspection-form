@@ -105,10 +105,31 @@ export default function LandingPage() {
             textTransform: "uppercase",
             textDecoration: "none",
             fontFamily: "Arial, Helvetica, sans-serif",
-            transition: "background 0.2s ease",
           }}
         >
           Workplace Exam
+        </Link>
+
+        <Link
+          href="/form/task-training"
+          style={{
+            display: "block",
+            width: "100%",
+            background: "transparent",
+            color: "#ffffff",
+            border: "2px solid #ffffff",
+            textAlign: "center",
+            padding: "12px 0",
+            borderRadius: "10px",
+            fontWeight: 700,
+            fontSize: "0.875rem",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            fontFamily: "Arial, Helvetica, sans-serif",
+          }}
+        >
+          Task Training Record
         </Link>
       </div>
 
