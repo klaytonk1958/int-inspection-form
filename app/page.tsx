@@ -153,6 +153,28 @@ export default function LandingPage() {
         >
           Safety Meeting
         </Link>
+
+        <Link
+          href="/form/near-miss"
+          style={{
+            display: "block",
+            width: "100%",
+            background: "transparent",
+            color: "#ffffff",
+            border: "2px solid #ffffff",
+            textAlign: "center",
+            padding: "12px 0",
+            borderRadius: "10px",
+            fontWeight: 700,
+            fontSize: "0.875rem",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            fontFamily: "Arial, Helvetica, sans-serif",
+          }}
+        >
+          Near Miss Entry
+        </Link>
       </div>
 
     </main>
