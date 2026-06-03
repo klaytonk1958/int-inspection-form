@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Resolve sheet ID
-    const sheetId = process.env.TASK_TRAINING_SHEET_ID || process.env.PRE_SHIFT_SHEET_ID;
+    const sheetId = process.env.TASK_TRAINING_SHEET_ID;
     if (!sheetId) {
       return NextResponse.json(
         { error: "Spreadsheet ID is not configured" },

@@ -3,42 +3,18 @@ import { appendRowToSheet } from "@/app/utils/google";
 
 export const runtime = "nodejs";
 
-const WORKPLACE_EXAM_HEADERS = [
+const SAFETY_MEETING_HEADERS = [
   "Timestamp",
-  "Supervisor Name:",
-  "Ground Conditions:",
-  "Comments GC:",
-  "Mitigation GC:",
-  "Berms Roadways:",
-  "Comments BR:",
-  "Mitigation BR:",
-  "Ponds:",
-  "Comments P:",
-  "Mitigation P:",
-  "Drainage:",
-  "Comments D:",
-  "Mitigation D:",
-  "Signage:",
-  "Comments S:",
-  "Mitigation S:",
-  "Fuel Trailer:",
-  "Comments FFT:",
-  "Mitigation FFT:",
-  "Traffic Patterns:",
-  "Comments TP:",
-  "Mitigation TP:",
-  "Gates :",
-  "Comments G:",
-  "Mitigation G:",
-  "Under & Overhead Power Lines:",
-  "Comments UOPL:",
-  "Mitigation UOPL:",
-  "Expected Date Correction:",
+  "Safety Leader:",
+  "Date:",
+  "Safety Subject:",
+  "Topics Discussed:",
+  "Employee Attendees:",
 ];
 
 export async function POST(request: NextRequest) {
   try {
-    // 1. Parse JSON body robustly (handling standard JSON and plain text submissions)
+    // 1. Parse JSON body robustly
     let body: any;
     try {
       body = await request.json();
@@ -69,8 +45,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 2. Resolve sheet credentials and targets
-    const sheetId = process.env.WORKPLACE_EXAM_SHEET_ID;
+    // 2. Resolve sheet ID
+    const sheetId = process.env.SAFETY_MEETING_SHEET_ID;
     if (!sheetId) {
       return NextResponse.json(
         { error: "Spreadsheet ID is not configured" },
@@ -78,19 +54,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const sheetName = process.env.WORKPLACE_EXAM_SHEET_NAME || "Work Place Exam Data";
+    const sheetName = process.env.SAFETY_MEETING_SHEET_NAME || "Safety Meeting Data";
 
     // 3. Append the row to Google Sheets
     await appendRowToSheet({
       spreadsheetId: sheetId,
       sheetName,
       data,
-      fallbackHeaders: WORKPLACE_EXAM_HEADERS,
+      fallbackHeaders: SAFETY_MEETING_HEADERS,
     });
 
     return NextResponse.json({ success: true, message: "Data added successfully" });
   } catch (error: any) {
-    console.error("Error submitting workplace exam data:", error);
+    console.error("Error submitting safety meeting record:", error);
     return NextResponse.json(
       { error: "Failed to add data", details: error.message || error },
       { status: 500 }
