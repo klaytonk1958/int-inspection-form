@@ -57,28 +57,61 @@ export default function LandingPage() {
         Even Par Mine · ID# 38-00774
       </p>
 
-      {/* CTA */}
-      <Link
-        href="/form/pre-shift"
+      {/* CTA Links */}
+      <div
         style={{
-          display: "block",
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
           width: "100%",
           maxWidth: "320px",
-          background: "#ffffff",
-          color: "#111111",
-          textAlign: "center",
-          padding: "14px 0",
-          borderRadius: "10px",
-          fontWeight: 700,
-          fontSize: "0.875rem",
-          letterSpacing: "0.06em",
-          textTransform: "uppercase",
-          textDecoration: "none",
-          fontFamily: "Arial, Helvetica, sans-serif",
         }}
       >
-        Start Pre-Shift Inspection
-      </Link>
+        <Link
+          href="/form/pre-shift"
+          style={{
+            display: "block",
+            width: "100%",
+            background: "#ffffff",
+            color: "#111111",
+            textAlign: "center",
+            padding: "14px 0",
+            borderRadius: "10px",
+            fontWeight: 700,
+            fontSize: "0.875rem",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            fontFamily: "Arial, Helvetica, sans-serif",
+          }}
+        >
+          Pre-Shift Inspection
+        </Link>
+        
+        <Link
+          href="/form/workplace-exam"
+          style={{
+            display: "block",
+            width: "100%",
+            background: "transparent",
+            color: "#ffffff",
+            border: "2px solid #ffffff",
+            textAlign: "center",
+            padding: "12px 0",
+            borderRadius: "10px",
+            fontWeight: 700,
+            fontSize: "0.875rem",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            fontFamily: "Arial, Helvetica, sans-serif",
+            transition: "background 0.2s ease",
+          }}
+        >
+          Workplace Exam
+        </Link>
+      </div>
+
     </main>
   );
 }
