@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
@@ -115,16 +116,24 @@ export default function SafetyMeetingForm() {
           <p className="text-slate-600 text-center mb-6">
             The Safety Meeting record has been submitted successfully.
           </p>
-          <button
-            type="button"
-            onClick={() => {
-              resetForm();
-              setShowThankYou(false);
-            }}
-            className="bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-medium shadow hover:bg-slate-700 transition"
-          >
-            Submit Another Record
-          </button>
+          <div className="flex flex-col gap-3 w-full max-w-xs">
+            <button
+              type="button"
+              onClick={() => {
+                resetForm();
+                setShowThankYou(false);
+              }}
+              className="w-full bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-medium shadow hover:bg-slate-700 transition"
+            >
+              Submit Another Record
+            </button>
+            <Link
+              href="/"
+              className="w-full text-center bg-white border border-slate-300 text-slate-700 px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition"
+            >
+              ← Main Menu
+            </Link>
+          </div>
         </div>
       )}
 
@@ -133,6 +142,9 @@ export default function SafetyMeetingForm() {
         <div className="bg-white rounded-2xl shadow-md p-4">
           {/* Header */}
           <header className="mb-6 border-b border-slate-100 pb-5">
+            <Link href="/" className="inline-flex items-center gap-1 text-[11px] text-slate-400 hover:text-slate-700 mb-3 transition">
+              ← Main Menu
+            </Link>
             <div className="bg-slate-900 text-white rounded-xl p-4 text-center mb-4">
               <h1 className="text-xl font-bold tracking-wider font-sans uppercase">
                 EPM Safety Meeting

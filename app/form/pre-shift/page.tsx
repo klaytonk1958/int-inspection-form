@@ -1,6 +1,7 @@
 "use client";
 // components/PreShiftInspectionForm.tsx
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { CHECKLIST_ROWS, ChecklistRow, Option, OPTION_COLORS } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
@@ -207,15 +208,33 @@ export default function PreShiftInspectionForm() {
       )}
       {/* Thank You Screen */}
       {showThankYou && (
-        <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center px-6">
           <h2 className="text-2xl font-bold text-slate-800 mb-2">Thank you!</h2>
-          <p className="text-slate-600 text-center">Your inspection has been submitted successfully.</p>
+          <p className="text-slate-600 text-center mb-6">Your inspection has been submitted successfully.</p>
+          <div className="flex flex-col gap-3 w-full max-w-xs">
+            <button
+              type="button"
+              onClick={() => setShowThankYou(false)}
+              className="w-full bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-medium shadow hover:bg-slate-700 transition"
+            >
+              Submit Another Inspection
+            </button>
+            <Link
+              href="/"
+              className="w-full text-center bg-white border border-slate-300 text-slate-700 px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition"
+            >
+              ← Main Menu
+            </Link>
+          </div>
         </div>
       )}
       {/* Main Form */}
       {!showThankYou && (
         <div className="bg-white rounded-2xl shadow-md p-4">
           <header className="mb-6 border-b border-slate-100 pb-5">
+            <Link href="/" className="inline-flex items-center gap-1 text-[11px] text-slate-400 hover:text-slate-700 mb-3 transition">
+              ← Main Menu
+            </Link>
             <div className="bg-slate-900 text-white rounded-xl p-4 text-center mb-4">
               <h1 className="text-xl font-bold tracking-wider font-sans uppercase">
                 EPM Pre-Shift Inspection

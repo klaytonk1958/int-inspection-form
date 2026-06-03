@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { INITIAL_EXAM_ROWS, ExamRow, ExamOption, OPTION_COLORS } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
@@ -132,19 +133,26 @@ export default function WorkplaceExamForm() {
           <p className="text-slate-600 text-center mb-6">
             Your Workplace Exam has been submitted successfully.
           </p>
-          <button
-            type="button"
-            onClick={() => {
-              // Reset the form
-              setSupervisorName("");
-              setExpectedDateCorrection("");
-              setRows(INITIAL_EXAM_ROWS);
-              setShowThankYou(false);
-            }}
-            className="bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-medium shadow hover:bg-slate-700 transition"
-          >
-            Submit Another Exam
-          </button>
+          <div className="flex flex-col gap-3 w-full max-w-xs">
+            <button
+              type="button"
+              onClick={() => {
+                setSupervisorName("");
+                setExpectedDateCorrection("");
+                setRows(INITIAL_EXAM_ROWS);
+                setShowThankYou(false);
+              }}
+              className="w-full bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-medium shadow hover:bg-slate-700 transition"
+            >
+              Submit Another Exam
+            </button>
+            <Link
+              href="/"
+              className="w-full text-center bg-white border border-slate-300 text-slate-700 px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition"
+            >
+              ← Main Menu
+            </Link>
+          </div>
         </div>
       )}
 
@@ -152,6 +160,9 @@ export default function WorkplaceExamForm() {
       {!showThankYou && (
         <div className="bg-white rounded-2xl shadow-md p-4">
           <header className="mb-6 border-b border-slate-100 pb-5">
+            <Link href="/" className="inline-flex items-center gap-1 text-[11px] text-slate-400 hover:text-slate-700 mb-3 transition">
+              ← Main Menu
+            </Link>
             <div className="bg-slate-900 text-white rounded-xl p-4 text-center mb-4">
               <h1 className="text-xl font-bold tracking-wider font-sans uppercase">
                 EPM Workplace Exam
