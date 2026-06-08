@@ -225,11 +225,10 @@ export default function WorkplaceExamForm() {
                             key={opt}
                             type="button"
                             onClick={() => setRowValue(r.id, opt)}
-                            className={`text-xs px-3.5 py-1.5 rounded-full border transition-all ${
-                              r.value === opt
-                                ? OPTION_COLORS[opt]
-                                : "bg-white text-slate-700 border-gray-200 hover:bg-gray-100"
-                            }`}
+                            className={`text-xs px-3.5 py-1.5 rounded-full border transition-all ${r.value === opt
+                              ? OPTION_COLORS[opt]
+                              : "bg-white text-slate-700 border-gray-200 hover:bg-gray-100"
+                              }`}
                           >
                             {opt}
                           </button>
@@ -256,9 +255,10 @@ export default function WorkplaceExamForm() {
                       <div className="flex justify-between items-center">
                         <label className="text-xs font-medium text-slate-500">
                           {r.mitigationLabel.replace(":", "")}{" "}
-                          {(r.value === "Not OK" || r.id === "drainage") && (
+                          {(r.value === "Not OK") && (
                             <span className="text-red-500">*</span>
                           )}
+
                         </label>
                       </div>
                       <textarea
@@ -267,7 +267,7 @@ export default function WorkplaceExamForm() {
                         value={r.mitigation}
                         onChange={(e) => setRowMitigation(r.id, e.target.value)}
                         placeholder="Describe what actions are being taken (or will be taken) to correct or minimize the hazard."
-                        required={r.value === "Not OK" || r.id === "drainage"}
+                        required={r.value === "Not OK"}
                       />
                     </div>
                   </div>
