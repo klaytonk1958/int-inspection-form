@@ -44,7 +44,7 @@ export default function WorkplaceExamForm() {
       return;
     }
 
-    // 2. Validation: All 9 checklist items must have OK or Not OK selected
+    // 2. Validation: All 18 checklist items must have OK or Not OK selected
     const unselected = rows.filter((r) => !r.value);
     if (unselected.length > 0) {
       setSubmitMessage(
@@ -57,7 +57,6 @@ export default function WorkplaceExamForm() {
     }
 
     // 3. Validation: If any item is "Not OK", mitigation must be filled.
-    // Also, "Mitigation D:" (Drainage) has an asterisk, but we make it required specifically if Drainage is Not OK.
     const missingMitigation = rows.filter((r) => r.value === "Not OK" && !r.mitigation.trim());
     if (missingMitigation.length > 0) {
       setSubmitMessage(
